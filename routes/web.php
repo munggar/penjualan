@@ -6,6 +6,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\CicilanController;
+use Illuminate\Support\Facades\DB;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -18,6 +19,16 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/db-check', function () {
+    try {
+        DB::connection()->getPdo();
+        return '✅ Connected to PostgreSQL!';
+    } catch (\Exception $e) {
+        return '❌ Error: ' . $e->getMessage();
+    }
+});
+
 
 // Dashboard
 Route::get('/', [DashboardController::class, 'index']);
