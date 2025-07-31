@@ -8,8 +8,11 @@
 
     <!-- Font & Bootstrap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+    </script>
 
     <style>
         body {
@@ -39,7 +42,8 @@
             text-decoration: underline;
         }
 
-        table th, table td {
+        table th,
+        table td {
             vertical-align: middle;
         }
     </style>
@@ -48,13 +52,45 @@
 <body>
     <!-- Header -->
     <header class="d-flex justify-content-between align-items-center">
-        <h1 class="h4">Toko Aksesoris Jahit</h1>
-        <nav>
-            <a href="/">Dashboard</a>
-            <a href="/produk">Produk</a>
-            <a href="/transaksi">Transaksi</a>
-            <a href="/laporan">Laporan</a>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">TOKO AKSESORIS JAHIT</a>
+
+                <!-- Hamburger Menu -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav"
+                    aria-controls="mobileNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Offcanvas Menu -->
+                <div class="offcanvas offcanvas-top text-bg-dark" tabindex="-1" id="mobileNav"
+                    aria-labelledby="mobileNavLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="mobileNavLabel">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/">Beranda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/produk">Produk</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/transaksi">Transaksi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/laporan">Laporan</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </nav>
+
     </header>
 
     <!-- Main Content -->
@@ -95,7 +131,8 @@
                         <tbody>
                             @foreach($laporanTerbaru as $laporan)
                             <tr>
-                                <td>{{ \Carbon\Carbon::parse($laporan->transaksi->transaction_date)->translatedFormat('d F Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($laporan->transaksi->transaction_date)->translatedFormat('d F Y') }}
+                                </td>
                                 <td>{{ $laporan->produk->name }}</td>
                                 <td>{{ $laporan->quantity }}</td>
                                 <td>{{ $laporan->transaksi->customer_name ?? '-' }}</td>
@@ -112,7 +149,8 @@
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Ringkasan Stok Produk</h5>
-                <a href="{{ route('produk.index') }}" class="btn btn-sm btn-outline-primary">Lihat Semua Produk &rarr;</a>
+                <a href="{{ route('produk.index') }}" class="btn btn-sm btn-outline-primary">Lihat Semua Produk
+                    &rarr;</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
