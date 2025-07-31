@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Transaksi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="app.css">
-</head>
+@include('layouts.app')
 
 <body class="bg-light">
 
@@ -116,7 +107,7 @@
                     <br>
 
                     {{-- Riwayat Pembayaran --}}
-                    @if($transaksi->pembayaran->count())
+                    @if($transaksi->pembayaran)
                     <h6>🧾 Riwayat Pembayaran</h6>
                     <table class="table table-sm table-bordered">
                         <thead class="table-light">
@@ -126,7 +117,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($transaksi->pembayaran as $bayar)
+                            @foreach($transaksi->pembayaranCicilan as $bayar)
                             <tr>
                                 <td>{{ $bayar->tanggal_bayar }}</td>
                                 <td>Rp {{ number_format($bayar->jumlah_bayar, 0, ',', '.') }}</td>
