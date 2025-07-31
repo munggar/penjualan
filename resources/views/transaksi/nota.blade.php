@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
-        body { font-family: Arial, sans-serif; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #000; padding: 5px; text-align: left; }
-        .no-border td { border: none; }
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
-        .lunas { font-size: 24px; font-weight: bold; color: green; margin-top: 20px; text-align: center; }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: left;
+        }
+
+        .no-border td {
+            border: none;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .lunas {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
 
     <table class="no-border">
@@ -73,4 +105,5 @@
     </table>
 
 </body>
+
 </html>

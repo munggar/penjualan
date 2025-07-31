@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
-        body { font-family: Arial, sans-serif; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #000; padding: 5px; text-align: left; }
-        .no-border td { border: none; }
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
-        .lunas { font-size: 24px; font-weight: bold; color: green; margin-top: 20px; text-align: center; }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: left;
+        }
+
+        .no-border td {
+            border: none;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .lunas {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
 
     <table class="no-border">
@@ -54,51 +86,51 @@
             @endforeach
             <tr>
                 <td>
-                    <td colspan="3" class="text-right"><strong>Jumlah Rp</strong></td>
-                    <td><strong>Rp {{ number_format($transaksi->total_amount, 0, ',', '.') }}</strong></td>
+                <td colspan="3" class="text-right"><strong>Jumlah Rp</strong></td>
+                <td><strong>Rp {{ number_format($transaksi->total_amount, 0, ',', '.') }}</strong></td>
                 </td>
             </tr>
 
             @php
-                $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
-                $sisa = $transaksi->total_amount - $dibayar;
+            $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
+            $sisa = $transaksi->total_amount - $dibayar;
             @endphp
 
             <tr>
                 <td>
-                    <td colspan="3" class="text-right"><strong>Total Dibayar</strong></td>
-                    <td><strong>Rp {{ number_format($dibayar, 0, ',', '.') }}</strong></td>
+                <td colspan="3" class="text-right"><strong>Total Dibayar</strong></td>
+                <td><strong>Rp {{ number_format($dibayar, 0, ',', '.') }}</strong></td>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <td colspan="3" class="text-right"><strong>Sisa Tagihan</strong></td>
-                    <td><strong>Rp {{ number_format($sisa, 0, ',', '.') }}</strong></td>
+                <td colspan="3" class="text-right"><strong>Sisa Tagihan</strong></td>
+                <td><strong>Rp {{ number_format($sisa, 0, ',', '.') }}</strong></td>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    @if($sisa <= 0)
-    <div class="lunas">✅ LUNAS</div>
-    @endif
+    @if($sisa <= 0) <div class="lunas">✅ LUNAS</div>
+        @endif
 
-    <br><br>
+        <br><br>
 
-    <table class="no-border">
-        <tr>
-            <td style="width: 50%;">Tanda terima</td>
-            <td>Hormat Kami</td>
-        </tr>
-        <tr>
-            <td style="height: 50px;"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>.......................</td>
-            <td>Wildan</td>
-        </tr>
-    </table>
+        <table class="no-border">
+            <tr>
+                <td style="width: 50%;">Tanda terima</td>
+                <td>Hormat Kami</td>
+            </tr>
+            <tr>
+                <td style="height: 50px;"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>.......................</td>
+                <td>Wildan</td>
+            </tr>
+        </table>
 
 </body>
+
 </html>

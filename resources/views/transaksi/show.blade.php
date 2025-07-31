@@ -44,25 +44,26 @@
                     </tbody>
                 </table>
 
-                    {{-- Bagian Pembayaran --}}
-                    <h5 class="mt-4">💳 Pembayaran</h5>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item">
-                            <strong>Metode:</strong> {{ $transaksi->payment_method === 'langsung' ? 'Bayar Langsung' : 'Cicilan' }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Total:</strong> Rp {{ number_format($transaksi->total_amount, 0, ',', '.') }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Total Dibayar:</strong> Rp {{ number_format($dibayar, 0, ',', '.') }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Sisa Tagihan:</strong> Rp {{ number_format($sisa, 0, ',', '.') }}
-                        </li>
-                    </ul>
-                    <div class="mb-3">
-                        <a href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank"
-                            class="btn btn-primary">🖨️ Cetak Nota dengan Metode Pembayaran</a>
+                {{-- Bagian Pembayaran --}}
+                <h5 class="mt-4">💳 Pembayaran</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <strong>Metode:</strong>
+                        {{ $transaksi->payment_method === 'langsung' ? 'Bayar Langsung' : 'Cicilan' }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Total:</strong> Rp {{ number_format($transaksi->total_amount, 0, ',', '.') }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Total Dibayar:</strong> Rp {{ number_format($dibayar, 0, ',', '.') }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Sisa Tagihan:</strong> Rp {{ number_format($sisa, 0, ',', '.') }}
+                    </li>
+                </ul>
+                <div class="mb-3">
+                    <a href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank" class="btn btn-primary">🖨️
+                        Cetak Nota dengan Metode Pembayaran</a>
 
                     {{-- Bagian Cicilan & Sisa Bayar --}}
                     <h5 class="mt-5">💸 Pembayaran</h5>
@@ -95,7 +96,9 @@
                         </div>
                     </form>
                     @else
-                    <p class="text-muted"><h6 class="mt-4">Pembayaran Sudah Dilakukan Langsung!</h6></p>
+                    <p class="text-muted">
+                        <h6 class="mt-4">Pembayaran Sudah Dilakukan Langsung!</h6>
+                    </p>
                     @endif
 
 
@@ -135,9 +138,9 @@
                             ← Kembali ke Daftar Transaksi
                         </a>
                     </div>
+                </div>
             </div>
         </div>
-    </div>
 
 </body>
 
