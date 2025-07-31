@@ -4,24 +4,7 @@ body {
   background-color: #f5f7fa;
   color: #333;
 }
-header {
-  background-color: #4f46e5;
-  color: #fff;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-nav a {
-  margin: 0 1rem;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-nav a:hover {
-  text-decoration: underline;
-}
+
 .container {
   max-width: 1000px;
   margin: 2rem auto;
