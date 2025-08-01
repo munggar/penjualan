@@ -83,9 +83,6 @@
                         <strong style="color: {{ $selisih > 0 ? 'green' : 'red' }}">
                             Rp{{ number_format($selisih, 0, ',', '.') }}
                         </strong>
-                        {{-- <strong>
-                Rp{{ number_format($totalPendapatan - $totalModal, 0, ',', '.') }}
-                        </strong> --}}
                     </td>
                 </tr>
             </tbody>
