@@ -23,8 +23,8 @@
                 <td>{{ $transaksi->customer_name }}</td>
                 <td>Rp{{ number_format($transaksi->total_amount, 0, ',', '.') }}</td>
                 <td>
-                    <a href="{{ route('transaksi.show', $transaksi->id) }}" class="btn btn-sm btn-info">Detail</a>
-                    <form action="{{ url('transaksi/destroy/'.$transaksi->id) }}" method="POST"
+                    <a href="{{ route('transaksi.show', $transaksi->id) }}" class="btn btn-sm btn-info" style="color: white">Detail</a>
+                    <form action="{{ url('transaksi/'.$transaksi->id) }}" method="POST"
                         style="display:inline-block;">
                         @csrf
                         @method('DELETE')
