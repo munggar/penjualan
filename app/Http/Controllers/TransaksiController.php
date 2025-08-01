@@ -120,8 +120,9 @@ public function store(Request $request)
     // Tampilkan detail transaksi
     public function show($id)
     {
-        $transaksi = Transaksi::with('details.produk','pembayaran','pembayaranCicilan')->findOrFail($id);
 
+        $transaksi = Transaksi::with('details.produk','pembayaran','pembayaranCicilan')->findOrFail($id);
+        // dd($transaksi->pembayaranCicilan);
 
         // Hitung total yang sudah dibayar dari pembayaran cicilan
         $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
@@ -140,10 +141,6 @@ public function store(Request $request)
 
         // Tampilkan view dengan data transaksi dan status
         return view('transaksi.show', compact('transaksi', 'dibayar', 'sisa', 'status', 'sisaText'));
-        //
-
-    // return view('transaksi.show', compact('transaksi', 'dibayar', 'sisa'));
-        // return view('transaksi.show', compact('transaksi'));
     }
 
     // Hapus transaksi
