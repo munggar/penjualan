@@ -1,8 +1,8 @@
-@include('layouts.app')
+@include('layouts.nav')
 
 <body class="bg-light">
 
-    <div class="container py-5">
+    <div class="container py-5 my-5">
         <div class="card shadow-sm border-0">
             <div class="card-body">
                 <h3 class="mb-3">🧾 Detail Transaksi</h3>
@@ -23,7 +23,6 @@
                             <th>Harga</th>
                             <th>Jumlah</th>
                             <th>Subtotal</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,16 +32,14 @@
                             <td>Rp {{ number_format($detail->price, 0, ',', '.') }}</td>
                             <td>{{ $detail->quantity }}</td>
                             <td>Rp {{ number_format($detail->price * $detail->quantity, 0, ',', '.') }}</td>
-                            <td>
-                                <a href="{{ route('transaksi.nota', $transaksi->id) }}" target="_blank"
+                        @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{{ route('transaksi.nota', $transaksi->id) }}" target="_blank"
                                     class="btn btn-primary btn-sm">
                                     🖨️ Cetak Nota Full
                                 </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
 
                 {{-- Bagian Pembayaran --}}
                 <h5 class="mt-4">💳 Pembayaran</h5>
@@ -110,7 +107,7 @@
                     <br>
 
                     {{-- Riwayat Pembayaran --}}
-                    @if($transaksi->pembayaran)
+                    @if($transaksi->pembayaran && $transaksi->payment_method === 'cicilan')
                     <h6>🧾 Riwayat Pembayaran</h6>
                     <table class="table table-sm table-bordered">
                         <thead class="table-light">
@@ -129,7 +126,7 @@
                         </tbody>
                     </table>
                     @else
-                    <p class="text-muted">Belum ada pembayaran cicilan.</p>
+                    <p class="text-muted">Tidak ada pembayaran cicilan.</p>
                     @endif
 
                     {{-- Tombol Kembali --}}

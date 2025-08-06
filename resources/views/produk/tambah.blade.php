@@ -1,9 +1,9 @@
-@include('layouts.app')
+@include('layouts.nav')
 
 <body>
     <div class="container my-5">
-        <div class="card shadow-sm">
-            <div class="card-header bg-info text-white fw-bold">
+        <div class="card shadow-sm my-5 w-75 mx-auto">
+            <div class="card-header fw-bold">
                 Tambah Stok untuk: {{ $product->name }}
             </div>
             <div class="card-body">

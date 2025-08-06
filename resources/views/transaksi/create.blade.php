@@ -1,8 +1,8 @@
-@include('layouts.app')
+@include('layouts.nav')
 
 <!-- Konten -->
-<div class="container">
-    <div class="card shadow-sm">
+<div class="container my-5">
+    <div class="card shadow-sm my-5">
         <div class="card-body">
             <h3 class="mb-4">Tambah Transaksi</h3>
 

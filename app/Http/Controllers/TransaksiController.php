@@ -10,6 +10,8 @@ use App\Models\PembayaranCicilan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Illuminate\Support\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TransaksiController extends Controller
 {
@@ -37,7 +39,7 @@ class TransaksiController extends Controller
     // Menampilkan semua transaksi
     public function index()
     {
-        $transaksis = Transaksi::all();
+        $transaksis = Transaksi::paginate(10); // Menggunakan pagination untuk menampilkan 10 transaksi per halaman
         return view('transaksi.index', compact('transaksis'));
     }
 
@@ -124,20 +126,37 @@ public function store(Request $request)
         $transaksi = Transaksi::with('details.produk','pembayaran','pembayaranCicilan')->findOrFail($id);
         // dd($transaksi->pembayaranCicilan);
 
-        // Hitung total yang sudah dibayar dari pembayaran cicilan
-        $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
-
-        // Hitung sisa tagihan
-        $sisa = $transaksi->total_amount - $dibayar;
-
-        // Jika transaksi belum lunas, tampilkan sisa tagihan
-        if ($sisa > 0) {
-            $status = 'Belum Lunas';
-            $sisaText = 'Sisa Tagihan: Rp ' . number_format($sisa, 0, ',', '.');
+        // Kondisi Bayar langsung atau cicilan
+        if ($transaksi->payment_method === 'langsung') {
+            // Hitung total yang sudah dibayar
+            $dibayar = $transaksi->pembayaran->sum('jumlah_bayar');
+            // dd($dibayar);
+            $sisa = $transaksi->total_amount - $dibayar;
+            // dd($sisa);
+            $status = $sisa > 0 ? 'Belum Lunas' : 'Lunas';
+            $sisaText = $sisa > 0 ? 'Sisa Tagihan: Rp ' . number_format($sisa, 0, ',', '.') : '';
         } else {
-            $status = 'Lunas';
-            $sisaText = '';
+            // Jika cicilan, hitung total yang sudah dibayar dari pembayaran cicilan
+            $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
+            $sisa = $transaksi->total_amount - $dibayar;
+            $status = $sisa > 0 ? 'Belum Lunas' : 'Lunas';
+            $sisaText = $sisa > 0 ? 'Sisa Tagihan: Rp ' . number_format($sisa, 0, ',', '.') : '';
         }
+
+        // Hitung total yang sudah dibayar dari pembayaran cicilan
+        // $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
+
+        // // Hitung sisa tagihan
+        // $sisa = $transaksi->total_amount - $dibayar;
+
+        // // Jika transaksi belum lunas, tampilkan sisa tagihan
+        // if ($sisa > 0) {
+        //     $status = 'Belum Lunas';
+        //     $sisaText = 'Sisa Tagihan: Rp ' . number_format($sisa, 0, ',', '.');
+        // } else {
+        //     $status = 'Lunas';
+        //     $sisaText = '';
+        // }
 
         // Tampilkan view dengan data transaksi dan status
         return view('transaksi.show', compact('transaksi', 'dibayar', 'sisa', 'status', 'sisaText'));

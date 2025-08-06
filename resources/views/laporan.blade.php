@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.nav')
 
 <style>
     body {
@@ -8,11 +8,9 @@
         color: #333;
     }
 
-    .container {
-        max-width: 1000px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-    }
+    /* .container {
+        margin: inherit;
+    } */
 
     .card {
         background-color: #fff;
@@ -80,9 +78,15 @@
         border: 1px solid #d1d5db;
         border-radius: 6px;
     }
+    @media (min-width: 768px) {
+    form button {
+        padding-left: 188px;
+        padding-top: 50px;
+    }
+}
 </style>
-<div class="container">
-    <div class="card">
+<div class="container my-5">
+    <div class="card my-5">
         <h2>Filter Laporan</h2>
         <form method="GET" action="{{ route('laporan.index') }}">
             <div class="form-row">
@@ -96,7 +100,7 @@
             <button class="btn btn-secondary" type="submit">Tampilkan</button>
             <a class="btn btn-secondary"
                 href="{{ route('laporan.cetak', ['tanggal_awal' => request('tanggal_awal'), 'tanggal_akhir' => request('tanggal_akhir')]) }}"
-                target="_blank">Cetak PDF</a>
+                download="Laporan-Penjualan">Cetak PDF</a>
             <a class="btn btn-secondary" href="{{ route('laporan.index') }}">Hapus Filter</a> {{-- Tambahan ini --}}
         </form>
 
@@ -132,10 +136,14 @@
                 </tr>
             </tfoot>
         </table>
+
     </div>
 
     <div class="card">
         <h2>Keuntungan & Kerugian</h2>
+            <a class="btn btn-secondary mb-3"
+                href="{{ route('report') }}"
+                download="Laporan-Keuangan">Cetak Laporan PDF</a>
         <table>
             <thead>
                 <tr>
@@ -153,10 +161,14 @@
                     <td>Rp{{ number_format($totalModal, 0, ',', '.') }}</td>
                 </tr>
                 <tr>
+                    <td>Total Biaya</td>
+                    <td>Rp{{ number_format($totalBiaya, 0, ',', '.') }}</td>
+                </tr>
+                <tr>
                     <td><strong>Keuntungan / Kerugian</strong></td>
                     <td>
                         @php
-                        $selisih = $totalPendapatan - $totalModal;
+                        $selisih = $totalPendapatan - $totalModal - $totalBiaya;
                         @endphp
                         <strong style="color: {{ $selisih > 0 ? 'green' : 'red' }}">
                             Rp{{ number_format($selisih, 0, ',', '.') }}
