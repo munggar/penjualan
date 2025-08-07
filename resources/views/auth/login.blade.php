@@ -1,67 +1,127 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
+{{-- @section('content') --}}
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Login Admin</div>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+    body {
+        background-color: #f3f4f6;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-                        <div class="row mb-3">
-                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-                            <div class="col-md-6">
-                                <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+    .login-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        padding: 30px 40px;
+        width: 100%;
+        max-width: 400px;
+    }
 
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+    .login-card h2 {
+        text-align: center;
+        margin-bottom: 24px;
+        color: #4f46e5;
+    }
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+    .form-group {
+        margin-bottom: 16px;
+    }
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+        font-size: 1rem;
+    }
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #4f46e5;
+        outline: none;
+    }
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+    .error {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 4px;
+    }
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+
+    .btn-login {
+        width: 100%;
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-login:hover {
+        background-color: #3730a3;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <h2>Login Admin</h2>
+        <form method="POST" action="{{ route('login') }}">
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
+                @error('username')
+                    <div class="error">{{ $message }}</div>
+                @enderror
             </div>
-        </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required>
+                @error('password')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                <label for="remember">Remember Me</label>
+            </div>
+
+            <button type="submit" class="btn-login">Login</button>
+        </form>
     </div>
 </div>
-@endsection
+
+{{-- @endsection --}}
