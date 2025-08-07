@@ -36,10 +36,13 @@
                         </tr>
                     </tbody>
                 </table>
-                <a href="{{ route('transaksi.nota', $transaksi->id) }}" target="_blank"
+                <form action="{{ route('transaksi.nota', $transaksi->id) }}" method="GET">
+                    <button type="submit" class="btn btn-primary btn-sm mb-3">🖨️ Cetak Nota Full</button>
+                </form>
+                {{-- <a href="{{ route('transaksi.nota', $transaksi->id) }}" target="_blank"
                                     class="btn btn-primary btn-sm">
                                     🖨️ Cetak Nota Full
-                                </a>
+                                </a> --}}
 
                 {{-- Bagian Pembayaran --}}
                 <h5 class="mt-4">💳 Pembayaran</h5>
@@ -59,8 +62,12 @@
                     </li>
                 </ul>
                 <div class="mb-3">
-                    <a href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank" class="btn btn-primary">🖨️
-                        Cetak Nota dengan Metode Pembayaran</a>
+                    <form action="{{ route('transaksi.cetak', $transaksi->id) }}" method="GET">
+                        <button type="submit" class="btn btn-primary btn-sm mb-3">🖨️ Cetak Nota dengan Metode
+                            Pembayaran</button>
+                    </form>
+                    {{-- <a href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank" class="btn btn-primary">🖨️
+                    Cetak Nota dengan Metode Pembayaran</a> --}}
 
                     {{-- Bagian Cicilan & Sisa Bayar --}}
                     <h5 class="mt-5">💸 Pembayaran</h5>

@@ -48,8 +48,12 @@
                         </form>
                     </td>
                     <td>
-                        <a href="{{ route('transaksi.cetak', $transaksi->id) }}" class="btn btn-sm btn-secondary"
-                            target="_blank">Cetak Nota</a>
+                        <form action="{{ route('transaksi.cetak', $transaksi->id) }}" method="GET">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-secondary">Cetak Nota</button>
+                        </form>
+                        {{-- <a href="{{ route('transaksi.cetak', $transaksi->id) }}" class="btn btn-sm btn-secondary"
+                            target="_blank">Cetak Nota</a> --}}
                     </td>
                 </tr>
                 @empty

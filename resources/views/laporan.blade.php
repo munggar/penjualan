@@ -78,12 +78,13 @@
         border: 1px solid #d1d5db;
         border-radius: 6px;
     }
+
     @media (min-width: 768px) {
-    form button {
-        padding-left: 188px;
-        padding-top: 50px;
+        form button {
+            padding-left: 188px;
+            padding-top: 50px;
+        }
     }
-}
 </style>
 <div class="container my-5">
     <div class="card my-5">
@@ -98,10 +99,13 @@
                 <input type="date" name="tanggal_akhir" id="tanggal_akhir" value="{{ request('tanggal_akhir') }}">
             </div>
             <button class="btn btn-secondary" type="submit">Tampilkan</button>
-            <a class="btn btn-secondary"
+            <form method="GET" action="{{ route('laporan.cetak', ['tanggal_awal' => request('tanggal_awal'), 'tanggal_akhir' => request('tanggal_akhir')]) }}" >
+                <button class="btn btn-secondary" type="submit">Cetak PDF</button>
+            </form>
+            {{-- <a class="btn btn-secondary"
                 href="{{ route('laporan.cetak', ['tanggal_awal' => request('tanggal_awal'), 'tanggal_akhir' => request('tanggal_akhir')]) }}"
-                download="Laporan-Penjualan">Cetak PDF</a>
-            <a class="btn btn-secondary" href="{{ route('laporan.index') }}">Hapus Filter</a> {{-- Tambahan ini --}}
+                download="Laporan-Penjualan">Cetak PDF</a> --}}
+            <a class="btn btn-secondary" href="{{ route('laporan.index') }}">Hapus Filter</a>
         </form>
 
     </div>
@@ -142,12 +146,12 @@
     <div class="card">
         <h2>Keuntungan & Kerugian</h2>
         <form method="GET" action="{{ route('report') }}">
-    <button class="btn btn-secondary mb-3" type="submit">Cetak Laporan PDF</button>
-</form>
+            <button class="btn btn-secondary mb-3" type="submit">Cetak Laporan PDF</button>
+        </form>
 
-            {{-- <a class="btn btn-secondary mb-3"
+        {{-- <a class="btn btn-secondary mb-3"
                 href="{{ route('report') }}"
-                download="Laporan-Keuangan">Cetak Laporan PDF</a> --}}
+        download="Laporan-Keuangan">Cetak Laporan PDF</a> --}}
         <table>
             <thead>
                 <tr>
