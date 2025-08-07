@@ -92,8 +92,23 @@
             </tr>
 
             @php
+            // $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
+            // $sisa = $transaksi->total_amount - $dibayar;
+            if ($transaksi->payment_method === 'langsung') {
+            // Hitung total yang sudah dibayar
+            $dibayar = $transaksi->pembayaran->sum('jumlah_bayar');
+            // dd($dibayar);
+            $sisa = $transaksi->total_amount - $dibayar;
+            // dd($sisa);
+            $status = $sisa > 0 ? 'Belum Lunas' : 'Lunas';
+            $sisaText = $sisa > 0 ? 'Sisa Tagihan: Rp ' . number_format($sisa, 0, ',', '.') : '';
+        } else {
+            // Jika cicilan, hitung total yang sudah dibayar dari pembayaran cicilan
             $dibayar = $transaksi->pembayaranCicilan->sum('jumlah_bayar');
             $sisa = $transaksi->total_amount - $dibayar;
+            $status = $sisa > 0 ? 'Belum Lunas' : 'Lunas';
+            $sisaText = $sisa > 0 ? 'Sisa Tagihan: Rp ' . number_format($sisa, 0, ',', '.') : '';
+        }
             @endphp
 
             <tr>
