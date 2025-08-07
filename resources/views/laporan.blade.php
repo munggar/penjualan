@@ -141,9 +141,13 @@
 
     <div class="card">
         <h2>Keuntungan & Kerugian</h2>
-            <a class="btn btn-secondary mb-3"
+        <form method="GET" action="{{ route('report') }}">
+    <button class="btn btn-secondary mb-3" type="submit">Cetak Laporan PDF</button>
+</form>
+
+            {{-- <a class="btn btn-secondary mb-3"
                 href="{{ route('report') }}"
-                download="Laporan-Keuangan">Cetak Laporan PDF</a>
+                download="Laporan-Keuangan">Cetak Laporan PDF</a> --}}
         <table>
             <thead>
                 <tr>
